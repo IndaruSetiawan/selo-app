@@ -1,0 +1,98 @@
+/* Pilihan tahun / bulan */
+.chart-select {
+	min-height: 36px;
+	padding: 6px 32px 6px 14px;
+	border: 1px solid var(--dark-grey);
+	border-radius: 36px;
+	background-color: var(--light);
+	color: var(--dark);
+	font-family: var(--poppins);
+	font-size: 14px;
+	cursor: pointer;
+}
+.chart-select:focus { outline: 2px solid var(--blue); outline-offset: 1px; }
+
+/* Kartu chart: jangan memunculkan scroll samping */
+#content main .table-data > .chart-card {
+	overflow-x: hidden;
+	min-width: 0;
+}
+
+/* Kartu .order yang berisi chart / tabel mengisi sisa lebar baris */
+#content main .table-data > .order {
+	flex: 2 1 480px;
+	min-width: 0;
+}
+
+/* Kartu samping (pie) */
+#content main .table-data > .chart-side {
+	flex: 1 1 320px;
+	min-width: 0;
+	background: var(--light);
+	border-radius: 20px;
+	padding: 24px;
+}
+
+/* Judul kartu */
+.card-head {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 12px;
+	margin-bottom: 16px;
+}
+.card-head h3 {
+	margin: 0;
+	font-size: 20px;
+	font-weight: 600;
+	color: var(--dark);
+}
+.card-sub {
+	margin: 4px 0 0;
+	font-size: 13px;
+	color: var(--dark-grey);
+}
+
+/* ===== Tabel menu terlaris ===== */
+#content main .table-data .order table.best-table {
+	width: 100%;
+	min-width: 0;
+	table-layout: auto;
+}
+#content main .table-data .order table.best-table th,
+#content main .table-data .order table.best-table td {
+	padding: 12px 10px;
+	font-size: 14px;
+	text-align: left;
+	white-space: nowrap;
+	vertical-align: middle;
+	border-bottom: 1px solid var(--grey);
+}
+#content main .table-data .order table.best-table tr td:first-child {
+	display: table-cell;
+	padding-left: 10px;
+}
+#content main .table-data .order table.best-table tbody tr:last-child td {
+	border-bottom: 0;
+}
+#content main .table-data .order table.best-table .num {
+	text-align: right;
+}
+.pill {
+	display: inline-block;
+	padding: 4px 14px;
+	border-radius: 20px;
+	background: var(--blue);
+	color: var(--light);
+	font-size: 12px;
+	font-weight: 600;
+}
+.pill.snacks { background: var(--orange); }
+
+/* Tablet / HP: tabel boleh di-scroll ke samping */
+@media (max-width: 768px) {
+	#content main .table-data > .order:not(.chart-card) {
+		overflow-x: auto;
+	}
+	.card-head { flex-wrap: wrap; }
+}

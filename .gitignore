@@ -1,0 +1,15 @@
+# rahasia & lingkungan
+.env
+
+# dependensi (bisa dibuat ulang dengan: composer install)
+/vendor/
+
+# gambar menu yang diunggah (tetap simpan .htaccess pengaman)
+/public/uploads/menus/*
+!/public/uploads/menus/.htaccess
+
+# lain-lain
+*.log
+.vscode/
+.DS_Store
+Thumbs.db

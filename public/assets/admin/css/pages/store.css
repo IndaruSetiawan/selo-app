@@ -1,0 +1,165 @@
+/* Tombol "Add Menu" memakai .btn-download milik main.css; <button> perlu reset border */
+#content main .head-title button.btn-download {
+	border: 0;
+	cursor: pointer;
+	font-family: var(--poppins);
+}
+
+/* ===== Tabel menu: tanpa scroll samping di laptop ===== */
+#content main .table-data .order table.menu-table {
+	width: 100%;
+	min-width: 0;
+	table-layout: auto;
+}
+
+#content main .table-data .order table.menu-table th,
+#content main .table-data .order table.menu-table td {
+	padding: 12px 8px;
+	font-size: 14px;
+	white-space: nowrap;
+	vertical-align: middle;
+	border-bottom: 1px solid var(--grey);
+}
+#content main .table-data .order table.menu-table tr td:first-child {
+	display: table-cell;
+	padding-left: 8px;
+}
+#content main .table-data .order table.menu-table tbody tr:last-child td {
+	border-bottom: 0;
+}
+
+#content main .table-data .order table.menu-table th:nth-child(5),
+#content main .table-data .order table.menu-table td:nth-child(5),
+#content main .table-data .order table.menu-table .desc {
+	white-space: normal;
+	min-width: 0;
+	max-width: 240px;
+}
+
+#content main .table-data .order table.menu-table td:last-child {
+	white-space: nowrap;
+}
+#content main .table-data .order table.menu-table td .status {
+	display: inline-block;
+	margin: 0 2px;
+	border: 0;
+	cursor: pointer;
+	font-family: var(--poppins);
+	font-size: 12px;
+	padding: 6px 14px;
+}
+
+/* Laptop ke atas: tidak ada scroll samping */
+@media (min-width: 993px) {
+	#content main .table-data .order {
+		overflow-x: visible !important;
+	}
+}
+
+/* Tablet / HP: tabel boleh di-scroll ke samping */
+@media (max-width: 992px) {
+	#content main .table-data .order {
+		overflow-x: auto;
+	}
+	#content main .table-data .order table.menu-table {
+		min-width: 720px;
+	}
+}
+
+.modal-content {
+	font-family: var(--poppins);
+	background: var(--light);
+	color: var(--dark);
+	border: 0;
+	border-radius: 20px;
+}
+.modal-head {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 20px 24px 8px;
+}
+.modal-head h2 { font-size: 22px; font-weight: 600; margin: 0; }
+.btn-x {
+	border: 0;
+	background: transparent;
+	color: var(--dark);
+	font-size: 28px;
+	line-height: 1;
+	cursor: pointer;
+}
+.field-label { display: block; margin: 12px 0 4px; font-size: 13px; font-weight: 600; }
+.field {
+	width: 100%;
+	padding: 10px 14px;
+	border: 1px solid var(--dark-grey);
+	border-radius: 10px;
+	background: var(--grey);
+	color: var(--dark);
+	font-size: 14px;
+}
+.field:focus { outline: 2px solid var(--blue); outline-offset: 1px; }
+.btn-mint,
+.btn-pink {
+	min-height: 24px;
+	border: 0;
+	border-radius: 36px;
+	color: var(--light);
+	font-family: var(--poppins);
+	font-weight: 600;
+	cursor: pointer;
+}
+.btn-submit { 
+	display: block; 
+	width: calc(100% - 48px); 
+	margin: 16px 24px 24px; 
+	min-height: 44px;
+	border: 0;
+	border-radius: 36px;
+	color: var(--light);
+	font-family: var(--poppins);
+	font-weight: 600;
+	cursor: pointer;
+	background: var(--blue); }
+.btn-mint {
+	background: var(--blue);
+	font-size: 12px;
+}
+.btn-pink {
+	background: var(--orange);
+	font-size: 12px;
+}
+
+/* ===== Modal Add/Edit: muat di layar laptop ===== */
+#menuModal .modal-content,
+#menuModal #menu-form,
+#menuModal #menu-form > div {
+	overflow: visible;
+	max-height: none;
+}
+#menuModal textarea.field {
+	resize: none;
+}
+body.modal-open {
+	overflow: hidden;
+}
+
+/* Layar laptop pendek: rapatkan jarak antar field */
+@media (max-height: 820px) {
+	#menuModal .modal-head { padding: 12px 24px 2px; }
+	#menuModal .modal-head h2 { font-size: 20px; }
+	#menuModal .field-label { margin: 7px 0 3px; font-size: 12px; }
+	#menuModal .field { padding: 6px 12px; font-size: 13px; }
+	#menuModal textarea.field { height: 60px; }
+	#menuModal .btn-submit { min-height: 38px; margin: 10px 24px 14px; }
+}
+
+/* Layar sangat pendek (mis. laptop 1366x768): lebih rapat lagi */
+@media (max-height: 700px) {
+	#menuModal .modal-head { padding: 8px 24px 0; }
+	#menuModal .modal-head h2 { font-size: 18px; }
+	#menuModal .field-label { margin: 5px 0 2px; font-size: 11px; }
+	#menuModal .field { padding: 4px 10px; font-size: 12px; border-radius: 8px; }
+	#menuModal textarea.field { height: 44px; }
+	#menuModal .btn-submit { min-height: 34px; margin: 8px 24px 10px; }
+}
