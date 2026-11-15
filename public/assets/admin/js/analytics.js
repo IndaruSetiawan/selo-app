@@ -4,53 +4,23 @@
 	var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 	var MONTHS_FULL = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-	var MENUS = [
-		{ name: 'Ramen',         category: 'Dish',   cost: 25000, price: 35000, base: 90 },
-		{ name: 'Noodle',        category: 'Dish',   cost: 15000, price: 25000, base: 110 },
-		{ name: 'Kimchi',        category: 'Dish',   cost: 10000, price: 20000, base: 70 },
-		{ name: 'Fried Chicken', category: 'Dish',   cost: 8000,  price: 15000, base: 140 },
-		{ name: 'Sate',          category: 'Dish',   cost: 10000, price: 20000, base: 100 },
-		{ name: 'Onion Ring',    category: 'Snacks', cost: 8000,  price: 15000, base: 80 }
-	];
+	var SRC = window.ANALYTICS;
+	var MENUS = SRC.menus;
+	var DATA = SRC.data;
+	var YEARS =SRC.years;
+	var LAST_MONTH = SRC.lastMonth;
 
-	var YEARS = [2025, 2026];
-	var LAST_MONTH = { 2025: 11, 2026: 10 };
-
-	function seeded(seed) {
-		return function () {
-			seed = (seed * 1664525 + 1013904223) % 4294967296;
-			return seed / 4294967296;
-		};
-	}
-
-	function buildData() {
-		var data = {};
-		var rand = seeded(2026);
-		YEARS.forEach(function (year, yi) {
-			data[year] = [];
-			for (var m = 0; m <= LAST_MONTH[year]; m++) {
-				var growth = 1 + (yi * 12 + m) * 0.03;
-				var qty = MENUS.map(function (menu) {
-					return Math.round(menu.base * growth * (0.75 + rand() * 0.5));
-				});
-				var sales = 0;
-				var cost = 0;
-				qty.forEach(function (q, i) {
-					sales += q * MENUS[i].price;
-					cost += q * MENUS[i].cost;
-				});
-				data[year].push({ qty: qty, sales: sales, cost: cost });
-			}
-		});
-		return data;
-	}
-
-	var DATA = buildData();
 	var state = { year: YEARS[YEARS.length - 1], month: 0 };
 	state.month = LAST_MONTH[state.year];
 
 	/*  Helper  */
 	function $(id) { return document.getElementById(id); }
+
+	function esc(v) {
+	return String(v).replace(/[&<>"']/g, function (c) {
+		return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+	});
+}
 
 	function rupiah(n) {
 		return 'Rp ' + Math.round(n).toLocaleString('id-ID');
@@ -85,6 +55,7 @@
 	var GREEN = '#00A86B';
 	var PURPLE = '#8E6FD8';
 	var RED = cssVar('--red', '#DB504A');
+	var PALETTE = [BLUE, ORANGE, YELLOW, GREEN, PURPLE, RED, '#2BB3C0', '#E85D9A', '#7FB800', '#8D6E63', '#5C6BC0', '#26A69A'];
 
 	/*  Chart  */
 	var theme = themeOptions();
@@ -137,8 +108,8 @@
 			foreColor: theme.chart.foreColor
 		},
 		series: [],
-		labels: MENUS.map(function (m) { return m.name; }),
-		colors: [BLUE, ORANGE, YELLOW, GREEN, PURPLE, RED],
+		labels: MENUS.map(function (m) { return m.name.replace(/[<>]/g, ''); }),
+		colors: PALETTE,
 		stroke: { colors: [cssVar('--light', '#FFFFFF')] },
 		legend: { position: 'bottom' },
 		dataLabels: { formatter: function (v) { return v.toFixed(0) + '%'; } },
@@ -167,28 +138,34 @@
 
 	/*  Render  */
 	function renderPie() {
-		var row = DATA[state.year][state.month];
-		pieChart.updateSeries(row.qty.map(function (q, i) { return q * MENUS[i].price; }));
-	}
+	if (!MENUS.length) return;
+	pieChart.updateSeries(DATA[state.year][state.month].rev);
+}
 
-	function renderTable() {
-		var rows = DATA[state.year];
-		var html = '';
-		for (var m = rows.length - 1; m >= 0; m--) {
-			var r = rows[m];
-			var best = 0;
-			r.qty.forEach(function (q, i) { if (q > r.qty[best]) best = i; });
-			var menu = MENUS[best];
-			html += '<tr>' +
-				'<td>' + MONTHS_FULL[m] + ' ' + state.year + '</td>' +
-				'<td>' + menu.name + '</td>' +
-				'<td><span class="pill ' + menu.category.toLowerCase() + '">' + menu.category + '</span></td>' +
-				'<td class="num">' + r.qty[best].toLocaleString('id-ID') + ' porsi</td>' +
-				'<td class="num">' + rupiah(r.qty[best] * menu.price) + '</td>' +
-				'</tr>';
+function renderTable() {
+	var rows = DATA[state.year];
+	var html = '';
+	for (var m = rows.length - 1; m >= 0; m--) {
+		var r = rows[m];
+		var best = 0;
+		r.qty.forEach(function (q, i) { if (q > r.qty[best]) best = i; });
+		var label = MONTHS_FULL[m] + ' ' + state.year;
+
+		if (!MENUS.length || r.qty[best] === 0) {
+			html += '<tr><td>' + label + '</td><td colspan="4">No sales</td></tr>';
+			continue;
 		}
-		$('best-body').innerHTML = html;
+		var menu = MENUS[best];
+		html += '<tr>' +
+			'<td>' + label + '</td>' +
+			'<td>' + esc(menu.name) + '</td>' +
+			'<td><span class="pill ' + esc(menu.category.toLowerCase()) + '">' + esc(menu.category) + '</span></td>' +
+			'<td class="num">' + r.qty[best].toLocaleString('id-ID') + ' porsi</td>' +
+			'<td class="num">' + rupiah(r.rev[best]) + '</td>' +
+			'</tr>';
 	}
+	$('best-body').innerHTML = html;
+}
 
 	function render() {
 		var rows = DATA[state.year];
