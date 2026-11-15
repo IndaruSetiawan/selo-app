@@ -116,6 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.replace('/');
         return;
     }
+    initClock();
     initPayment();
     renderOrderSummary();
     renderServerOrder(info);

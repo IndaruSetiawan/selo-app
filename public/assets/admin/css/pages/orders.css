@@ -172,9 +172,33 @@ body {
 	border-bottom: 2px solid var(--grey);
 }
 
-.status-select { border: 0; border-radius: 20px; padding: 6px 14px; font-size: 12px; font-weight: 700; color: #fff; cursor: pointer; appearance: none; }
+.status-select { 
+	border: 0; 
+	border-radius: 20px; 
+	padding: 6px 14px; 
+	font-size: 12px; font-weight: 700; 
+	color: #fff; 
+	cursor: pointer; 
+	appearance: none; 
+	text-align: center;
+}
+
 .status-select.pending   { background: var(--yellow); color: var(--dark); }
 .status-select.process   { background: var(--blue); }
 .status-select.completed { background: var(--green); }
 .status-select.canceled  { background: var(--orange); }
 .status-select option    { background: #fff; color: var(--dark); }
+
+.btn-delete {
+	min-height: 24px;
+	padding: 6px 16px;
+	white-space: nowrap;
+	border: 0;
+	border-radius: 36px;
+	color: var(--light);
+	font-family: var(--poppins);
+	font-weight: 600;
+	cursor: pointer;
+	background: var(--orange);
+	font-size: 12px;
+}

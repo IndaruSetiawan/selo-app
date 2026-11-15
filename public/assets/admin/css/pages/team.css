@@ -1,0 +1,54 @@
+.form-select,
+.badge,
+.btn-remove {
+	line-height: 18px;
+}
+.team-list form {
+    margin-right: 20px;
+}
+.team-list td {
+	vertical-align: middle;
+}
+.form-select { 
+	border: 0; 
+	border-radius: 20px; 
+	padding: 6px 8px; 
+	font-size: 14px; 
+    font-weight: 400; 
+	color: var(--dark); 
+	cursor: pointer; 
+	appearance: none; 
+	text-align: center;
+}
+.badge { 
+	border: 0; 
+	border-radius: 20px; 
+	padding: 6px 16px; 
+    font-weight: 400; 
+	color: #fff; 
+	cursor: pointer; 
+	appearance: none; 
+	text-align: center;
+}
+.badge-active {
+    background: var(--green);
+	font-size: 14px;
+}
+.badge-pending {
+    background: var(--green);
+    color: var(--dark);
+	font-size: 14px;
+}
+
+.btn-remove {
+	min-height: 24px;
+    padding: 6px 16px;
+	border: 0;
+	border-radius: 36px;
+	color: var(--light);
+	font-family: var(--poppins);
+	font-weight: 400;
+	cursor: pointer;
+	background: var(--orange);
+	font-size: 14px;
+}

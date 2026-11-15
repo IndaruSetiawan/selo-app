@@ -99,8 +99,8 @@
 	font-size: 14px;
 }
 .field:focus { outline: 2px solid var(--blue); outline-offset: 1px; }
-.btn-mint,
-.btn-pink {
+.btn-edit,
+.btn-delete {
 	min-height: 24px;
 	border: 0;
 	border-radius: 36px;
@@ -121,11 +121,11 @@
 	font-weight: 600;
 	cursor: pointer;
 	background: var(--blue); }
-.btn-mint {
+.btn-edit {
 	background: var(--blue);
 	font-size: 12px;
 }
-.btn-pink {
+.btn-delete {
 	background: var(--orange);
 	font-size: 12px;
 }

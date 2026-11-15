@@ -52,7 +52,7 @@
 						<?php if ($canWrite): ?>
 							<td>
 								<div class="d-flex flex-column gap-1">
-									<button type="button" class="btn-mint" data-action="edit"
+									<button type="button" class="btn-edit" data-action="edit"
 										data-id="<?= (int) $m['id_menu'] ?>"
 										data-name="<?= e($m['menu_name']) ?>"
 										data-category="<?= e($m['category']) ?>"
@@ -60,7 +60,7 @@
 										data-cost="<?= (int) $m['cost'] ?>"
 										data-price="<?= (int) $m['price'] ?>"
 										data-img="<?= e($m['image'] ? basename($m['image']) : '') ?>">Edit</button>
-									<button type="button" class="btn-pink" data-action="delete" data-id="<?= (int) $m['id_menu'] ?>">Delete</button>
+									<button type="button" class="btn-delete" data-action="delete" data-id="<?= (int) $m['id_menu'] ?>">Delete</button>
 								</div>
 							</td>
 						<?php endif; ?>

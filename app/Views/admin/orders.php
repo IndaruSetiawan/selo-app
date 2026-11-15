@@ -166,7 +166,7 @@ $cols      = 8 + ($canDelete ? 1 : 0);
                                 onsubmit="return confirm('Delete this order?')">
                                 <input type="hidden" name="csrf" value="<?= e(csrf_token()) ?>">
                                 <input type="hidden" name="id_order" value="<?= e($o['id_order']) ?>">
-                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                <button type="submit" class="btn-delete">Delete</button>
                             </form>
                         </td>
                         <?php endif; ?>

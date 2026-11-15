@@ -24,11 +24,11 @@
                     <div class="d-flex gap-3 align-items-center">
                         <div class="card-date d-inline-flex align-items-center px-4 py-2 rounded-pill fw-bold text-muted small">
                             <i class="bi bi-calendar2-week px-2"></i>
-                            <span id="live-date">Mon, Jan 01 2026</span>
+                            <span id="live-date"></span>
                         </div>
                         <div class="card-date d-inline-flex align-items-center px-4 py-2 rounded-pill fw-bold text-muted small">
                             <i class="bi bi-clock px-2"></i>
-                            <span id="live-time">10:10 AM</span>
+                            <span id="live-time"></span>
                         </div>
                         <button id="cancel-btn" class="btn cancel-btn d-inline-flex align-items-center px-4 py-2 rounded-pill fw-bold small">
                             Cancel Order

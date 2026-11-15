@@ -49,7 +49,7 @@ $cols = 7 + ($canWrite ? 1 : 0);
 											<?php if ($canWrite && $active && !$isMe): ?>
 											<form action="/admin/team/role" method="post">
 												<input type="hidden" name="csrf" value="<?= $id ?>">
-												<select name="role" class="form-select form-select-sm" onchange="this.form.submit()">
+												<select name="role" class="form-select" onchange="this.form.submit()">
 													<option value="staff" <?= $member['role'] === 'staff' ? 'selected' : '' ?>>Staff</option>
 													<option value="admin" <?= $member['role'] === 'admin' ? 'selected' : '' ?>>Admin</option>
 												</select>
@@ -59,7 +59,7 @@ $cols = 7 + ($canWrite ? 1 : 0);
 											<?php endif; ?>	
 										</td>
 										<td>
-											<span class="badge <?= $active ? 'bg-success' : 'bg-warning text-dark' ?>">
+											<span class="badge <?= $active ? 'badge-active' : 'badge-pending' ?>">
 												<?= $active ? 'Active' : 'Pending' ?>
 											</span>
 										</td>
@@ -77,7 +77,7 @@ $cols = 7 + ($canWrite ? 1 : 0);
 														<form action="/admin/team/reject" method="post" onsubmit="return confirm('<?= $active ? 'Remove' : 'Reject' ?> <?=  e($member['name']) ?>?')">
 															<input type="hidden" name="csrf" value="<?= e(csrf_token()) ?>">
 															<input type="hidden" name="id_staff" value="<?= $id ?>">
-															<button type="submit" class="btn btn-sm btn-danger"><?= $active ? 'Remove' : 'Reject' ?></button>
+															<button type="submit" class="btn-remove"><?= $active ? 'Remove' : 'Reject' ?></button>
 														</form>
 													</div>
 												<?php endif; ?>

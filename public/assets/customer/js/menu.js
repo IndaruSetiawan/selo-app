@@ -131,3 +131,9 @@ function initDetailMenuModal() {
     }
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    initMenu();
+    initCategoryFilter();
+    initDetailMenuModal();
+    initClock();
+});
